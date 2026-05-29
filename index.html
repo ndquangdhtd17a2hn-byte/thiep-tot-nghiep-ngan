@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lễ Tốt Nghiệp - Thái Thị Ngân</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div id="welcome-screen">
+        <div class="welcome-box">
+            <span class="cloud-icon">☁️</span>
+            <h1>SKY OF GRADUATION</h1>
+            <p>Trân trọng kính mời Bạn mở thiệp chúc mừng nhé! ✨</p>
+            <button id="open-btn">MỞ THIỆP NGAY ✉️</button>
+        </div>
+    </div>
+
+    <div id="sky-container"></div>
+
+    <div id="main-content" class="hidden">
+        <button id="music-toggle" class="rotating">🎵</button>
+
+        <div class="scroll-nav">
+            <button id="scroll-up" class="nav-btn" title="Lên trang 1"><i class="fas fa-chevron-up"></i></button>
+            <button id="scroll-down" class="nav-btn" title="Xuống trang 2"><i class="fas fa-chevron-down"></i></button>
+        </div>
+
+        <div class="card-wrapper">
+            <section class="card" id="page-1">
+                <div class="fixed-cloud top-left">☁️✨</div>
+                <div class="fixed-cloud top-right">✨☁️</div>
+
+                <span class="cap-icon">🎓</span>
+                <h2 class="title-text">LỄ TỐT NGHIỆP</h2>
+                <p class="sub-title">Fly High Into The Sky</p>
+                <div class="cloud-line">☁️⭐️☁️⭐️☁️</div>
+                
+                <div class="avatar-container">
+                    <img src="anh-chinh.jpg" alt="Ảnh cử nhân Thái Thị Ngân" class="avatar">
+                </div>
+
+                <div class="info">
+                    <p class="invite-p">Trân trọng kính mời Bạn đến dự lễ nhận bằng tốt nghiệp của:</p>
+                    <h3 class="student-name">THÁI THỊ NGÂN</h3>
+                    
+                    <div class="detail-box">
+                        <p>🏫 <strong>Trường:</strong> Đại học Sư phạm Hà Nội</p>
+                        <p>⏰ <strong>Thời gian:</strong> 08:30 AM | Ngày 15/06/2026</p>
+                        <p>📍 <strong>Địa điểm:</strong> Hội trường chính</p>
+                        <p style="font-size: 0.8rem; color: #636e72; line-height: 1.3; margin-top: 5px;">
+                            (136 Đ. Xuân Thủy, Dịch Vọng Hậu, Cầu Giấy, Hà Nội)
+                        </p>
+                        
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=Trường+Đại+học+Sư+phạm+Hà+Nội,+136+Xuân+Thủy,+Cầu+Giấy,+Hà+Nội" 
+                           target="_blank" 
+                           style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin-top: 15px; padding: 12px; background-color: #0984e3; color: white; text-decoration: none; font-weight: bold; font-size: 0.9rem; border-radius: 10px; box-shadow: 0 4px 10px rgba(9, 132, 227, 0.2); transition: 0.3s;">
+                           <i class="fas fa-map-marker-alt"></i> Xem Bản Đồ & Chỉ Đường
+                        </a>
+                    </div>
+                </div>
+
+                <div class="cloud-line">☁️⭐️☁️⭐️☁️</div>
+                <p class="scroll-hint">Bấm mũi tên góc dưới hoặc cuộn xuống xem tiếp ⬇️</p>
+            </section>
+
+            <section class="card" id="page-2">
+                <div class="fixed-cloud top-left">✨☁️</div>
+                <div class="fixed-cloud top-right">☁️✨</div>
+
+                <h2 class="title-text-small">KỶ NIỆM THANH XUÂN</h2>
+                <div class="cloud-line">☁️⭐️☁️⭐️☁️</div>
+                
+                <div class="avatar-container decor-photo">
+                    <img src="anh-trang-tri.jpg" alt="Ảnh kỷ niệm Sư Phạm" class="avatar">
+                </div>
+
+                <div class="thanks-box">
+                    <p class="quote-p">🕊️ "Tốt nghiệp không phải là kết thúc, mà là khởi đầu cho một hành trình mới rực rỡ hơn."</p>
+                    <p class="footer">Sự hiện diện của bạn là niềm vinh hạnh và hạnh phúc lớn lao đối với Ngân! Trân trọng cảm ơn! ❤️</p>
+                </div>
+                
+                <div class="fixed-cloud bottom-left">☁️</div>
+                <div class="fixed-cloud bottom-right">☁️</div>
+            </section>
+        </div>
+    </div>
+
+    <audio id="bg-music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
