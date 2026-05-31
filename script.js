@@ -10,21 +10,37 @@ const scrollDown = document.getElementById('scroll-down');
 const page1 = document.getElementById('page-1');
 const page2 = document.getElementById('page-2');
 
-// Hàm tạo hiệu ứng mây bay trôi lững lờ dưới nền
+// Hàm tạo hiệu ứng Mây trắng xốp 3D và Sao vàng tươi mới bay lững lờ
 function startSkyAnimation() {
-    const elements = ['☁️', '☁️', '✨', '⭐️', '☁️'];
-    for (let i = 0; i < 25; i++) {
-        const element = document.createElement('div');
-        element.classList.add('sky-element');
-        element.innerText = elements[Math.floor(Math.random() * elements.length)];
+    // Tạo 12 đám mây trắng to nhỏ khác nhau
+    for (let i = 0; i < 12; i++) {
+        const cloud = document.createElement('div');
+        cloud.classList.add('bright-cloud');
         
-        element.style.top = Math.random() * 80 + 'vh'; 
-        element.style.fontSize = Math.random() * 1.5 + 1 + 'rem';
-        element.style.opacity = Math.random() * 0.5 + 0.3; 
-        element.style.animationDuration = Math.random() * 15 + 15 + 's'; 
-        element.style.animationDelay = Math.random() * -20 + 's'; 
+        // Tạo kích thước ngẫu nhiên cho đám mây sinh động
+        const width = Math.random() * 80 + 60; // từ 60px đến 140px
+        const height = width * 0.4;
+        cloud.style.width = width + 'px';
+        cloud.style.height = height + 'px';
         
-        skyContainer.appendChild(element);
+        cloud.style.top = Math.random() * 85 + 'vh'; 
+        cloud.style.animationDuration = Math.random() * 20 + 20 + 's'; // Tốc độ trôi lững lờ
+        cloud.style.animationDelay = Math.random() * -25 + 's'; // Để mây xuất hiện rải rác ngay từ đầu
+        
+        skyContainer.appendChild(cloud);
+    }
+
+    // Tạo 15 ngôi sao vàng lấp lánh đi kèm
+    for (let i = 0; i < 15; i++) {
+        const star = document.createElement('div');
+        star.classList.add('bright-star');
+        star.innerHTML = Math.random() > 0.5 ? '✨' : '⭐️';
+        
+        star.style.top = Math.random() * 90 + 'vh';
+        star.style.animationDuration = Math.random() * 15 + 20 + 's';
+        star.style.animationDelay = Math.random() * -20 + 's';
+        
+        skyContainer.appendChild(star);
     }
 }
 
@@ -35,7 +51,6 @@ openBtn.addEventListener('click', () => {
         welcomeScreen.classList.add('hidden');
         mainContent.classList.remove('hidden');
         
-        // Kích hoạt nhạc và mây bay
         bgMusic.play().catch(e => console.log("Lỗi duyệt chặn nhạc tự động:", e));
         startSkyAnimation();
     }, 800);
@@ -52,7 +67,7 @@ musicToggle.addEventListener('click', () => {
     }
 });
 
-// Xử lý sự kiện bấm nút di chuyển Lên/Xuống mượt mà
+// Bấm nút di chuyển Lên/Xuống
 scrollDown.addEventListener('click', () => {
     page2.scrollIntoView({ behavior: 'smooth' });
 });
