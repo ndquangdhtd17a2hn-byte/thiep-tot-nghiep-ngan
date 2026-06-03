@@ -4,52 +4,58 @@ const skyContainer = document.getElementById('sky-container');
 
 let musicStarted = false;
 
-// Hàm kích hoạt phát nhạc nền khi lật trang sách thành công
+// Hàm kích hoạt phát nhạc nền ngay lập tức
 function playMusic() {
     if (!musicStarted) {
         bgMusic.play().then(() => {
             musicStarted = true;
             musicToggle.classList.add('rotating');
-        }).catch(err => console.log("Đang đợi tương tác vuốt mạnh để kích hoạt nhạc..."));
+        }).catch(err => console.log("Chờ vuốt lật trang bìa để duyệt nhạc..."));
     }
 }
 
-// KHỞI TẠO CUỐN SÁCH MỞ ĐÔI SONG SONG (CỐ ĐỊNH 2 TRANG)
+// KHỞI TẠO CUỐN SÁCH: ĐÓNG BAN ĐẦU -> VUỐT LẬT MỞ ĐÔI 45 ĐỘ
 document.addEventListener('DOMContentLoaded', () => {
-    // Đảm bảo thư viện PageFlip đã được nạp chính xác từ link CDN ở file HTML
     if (typeof St !== 'undefined' && St.PageFlip) {
         const pageFlip = new St.PageFlip(document.getElementById('my-book'), {
-            width: 400,   // Chiều rộng của 1 trang đơn
-            height: 600,  // Chiều cao của trang
+            width: 400,   
+            height: 600,  
             size: "stretch",
             minWidth: 200,
             maxWidth: 450,
             minHeight: 400,
             maxHeight: 650,
-            drawShadow: true, // Kích hoạt đổ bóng 3D ở giữa gáy sách khi lật trang
+            drawShadow: true, 
             
-            // 🌟 CẤU HÌNH ĐỂ KHÔNG BỊ MẤT TRANG CŨ (HIỂN THỊ ĐÔI TRÁI - PHẢI)
-            usePortrait: false, // Tắt chế độ trang đơn dọc
-            mode: "landscape",  // Ép buộc cuốn sách luôn mở đôi dạng nằm ngang rộng rãi
+            // 🌟 CẤU HÌNH THÔNG MINH CHO QUYỂN SÁCH ĐÓNG TỰ NHIÊN:
+            usePortrait: true,     // Bắt đầu bằng chế độ trang đơn (chỉ thấy trang bìa đơn khi đóng sách)
+            autoSize: true,
             
             startPage: 0,
         });
 
-        // Đổ toàn bộ các khối trang .page vào cấu trúc lật của thư viện
+        // Nạp các trang giấy vào hệ thống
         pageFlip.loadFromHTML(document.querySelectorAll('.page'));
 
-        // Sự kiện: Khi khách vuốt lật trang sách -> Tự động đánh nhạc ngay!
+        // 🌟 BẮT SỰ KIỆN QUAN TRỌNG: Khách vừa chạm vuốt mở trang bìa đầu tiên!
         pageFlip.on('flip', (e) => {
+            // 1. Kích hoạt phát nhạc ngay tức khắc khi trang bìa chuyển động
             playMusic();
+            
+            // 2. Chuyển sách sang hiển thị chế độ ĐÔI (landscape) để lộ góc cong 45 độ và gáy giữa đậm sắc nét!
+            if (e.data === 1) {
+                pageFlip.update({ usePortrait: false });
+            }
+            // Nếu khách lật ngược quay lại trang bìa ngoài cùng -> Đóng sách lại gọn gàng
+            if (e.data === 0) {
+                pageFlip.update({ usePortrait: true });
+            }
         });
-    } else {
-        console.error("Lỗi: Chưa kết nối hoặc lỗi đường truyền thư viện lật trang PageFlip!");
     }
 });
 
-// Hàm tạo hiệu ứng sinh đám mây trắng 3D và sao bay lơ lửng ngẫu nhiên dưới nền
+// Hàm tạo hiệu ứng mây trôi lững lờ dưới nền trời
 function createClouds() {
-    // Tạo 8 đám mây trôi lững lờ từ trái qua phải
     for (let i = 0; i < 8; i++) {
         const cloud = document.createElement('div');
         cloud.className = 'bright-cloud';
@@ -64,7 +70,7 @@ function createClouds() {
 }
 createClouds();
 
-// Xử lý sự kiện bấm nút đĩa nhạc thủ công
+// Điều khiển nhạc bằng đĩa xoay thủ công cố định
 musicToggle.addEventListener('click', () => {
     if (bgMusic.paused) {
         bgMusic.play();
