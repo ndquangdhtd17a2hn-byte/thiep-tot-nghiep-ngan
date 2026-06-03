@@ -12,44 +12,54 @@ body {
     overflow: hidden;
 }
 
-/* Khung bọc quyển sách cuốn đồ án 3D */
+/* Khung bọc quyển sách - tự động căn giữa dựa theo việc đóng/mở sách */
 .book-container {
     width: 100%;
-    max-width: 900px; /* Chừa khoảng trống tối đa khi mở đôi 2 trang */
+    max-width: 900px; /* Đủ rộng để hiển thị 2 trang khi mở đôi */
     height: 85vh;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 10;
     padding: 20px;
-    perspective: 2000px; /* Chiều sâu lập thể 3D */
+    perspective: 2000px; /* Tạo độ sâu 3D cho hiệu ứng uốn cong trang sách */
 }
 
+/* Quyển sách lật */
 .flip-book {
     box-shadow: 0 35px 85px rgba(0, 0, 0, 0.45);
-    background: #bbb;
-    border-radius: 6px;
-    margin: 0 auto;
+    background: transparent; /* Loại bỏ phần nền bao thô cứng */
+    border-radius: 8px;
 }
 
-/* 📖 ĐỊNH DẠNG TRANG SÁCH MỞ GÓC CONG 45 ĐỘ 📖 */
+/* Định dạng chung cho các trang giấy bên trong */
 .page {
     background-color: #ffffff;
     overflow: hidden;
 }
 
-/* Hiệu ứng chuyển màu gradient tối dần về gáy sách để tạo cảm giác uốn cong hướng 45 độ về người xem */
+/* 📖 GIẢ LẬP ĐỘ CONG 3D VÀ ĐƯỜNG GÁY SÁCH KHI MỞ ĐÔI 📖 */
+/* Trang nằm bên trái: Hiệu ứng tối dần về bên phải (gáy sách) */
 .page-left {
-    background: linear-gradient(to right, #ffffff 80%, #f4f4f4 92%, #cfcfcf 100%) !important;
+    background: linear-gradient(to right, #ffffff 80%, #f4f4f4 93%, #d5d5d5 100%) !important;
+}
+.page-left .page-content {
+    border-right: 4px solid #111111; /* Thanh xương gáy sách ở giữa */
+    box-shadow: inset -15px 0 20px rgba(0,0,0,0.12);
 }
 
+/* Trang nằm bên phải: Hiệu ứng tối dần về bên trái (gáy sách) */
 .page-right {
-    background: linear-gradient(to left, #ffffff 80%, #f4f4f4 92%, #cfcfcf 100%) !important;
+    background: linear-gradient(to left, #ffffff 80%, #f4f4f4 93%, #d5d5d5 100%) !important;
+}
+.page-right .page-content {
+    border-left: 4px solid #111111; /* Thanh xương gáy sách ở giữa */
+    box-shadow: inset 15px 0 20px rgba(0,0,0,0.12);
 }
 
 .page-content {
     width: 100%; height: 100%;
-    padding: 30px 25px;
+    padding: 30px 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -58,27 +68,15 @@ body {
     position: relative;
 }
 
-/* ✒️ ĐƯỜNG VIỀN GiỮA 2 TRANG ĐẬM RÕ NÉT ĐỂ DỄ PHÂN BIỆT */
-.page-left .page-content {
-    border-right: 4px solid #1a1a1a; /* Thanh gáy trái màu đậm siêu rõ */
-    box-shadow: inset -15px 0 25px rgba(0,0,0,0.18); /* Đổ bóng lòng trong */
-}
-
-.page-right .page-content {
-    border-left: 4px solid #1a1a1a; /* Thanh gáy phải màu đậm siêu rõ */
-    box-shadow: inset 15px 0 25px rgba(0,0,0,0.18); /* Đổ bóng lòng trong */
-}
-
-/* 📘 THIẾT KẾ RIÊNG: BÌA ĐỒ ÁN MẠ VÀNG 📘 */
+/* 📘 THIẾT KẾ RIÊNG CHO TRANG BÌA ĐỒ ÁN SANG TRỌNG 📘 */
 .thesis-cover {
     background: #0f2b46 !important; 
     color: #ffd700;
 }
 
-/* Khi là trang bìa ngoài cùng đang đóng, giấu bóng lòng đi để phẳng phiu đẹp mắt */
 .thesis-cover .page-content {
-    box-shadow: none !important;
     border: none !important;
+    box-shadow: none !important;
     background: #0f2b46 !important;
 }
 
@@ -87,88 +85,84 @@ body {
     margin: 10px;
     height: calc(100% - 20px) !important;
     width: calc(100% - 20px) !important;
-    padding: 25px 15px !important;
+    padding: 20px 15px !important;
     position: relative;
 }
 
 .thesis-border::before {
     content: ''; position: absolute; top: 5px; left: 5px; right: 5px; bottom: 5px;
-    border: 1px solid rgba(255, 215, 0, 0.3); pointer-events: none;
+    border: 1px solid rgba(255, 215, 0, 0.4); pointer-events: none;
 }
 
 .ministry-title { font-size: 0.75rem; font-weight: bold; letter-spacing: 1px; color: #ffffff; }
 .university-title { font-size: 0.8rem; font-weight: bold; margin-top: 5px; color: #ffd700; letter-spacing: 0.5px; }
 .thesis-decor-line { font-size: 0.6rem; margin: 8px 0; color: #ffd700; }
-.thesis-main-title { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 900; letter-spacing: 3px; color: #ffffff; margin-top: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-.thesis-sub-title { font-size: 0.95rem; font-weight: bold; color: #ffd700; margin-bottom: 5px; letter-spacing: 1px; }
+.thesis-main-title { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; letter-spacing: 3px; color: #ffffff; margin-top: 10px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+.thesis-sub-title { font-size: 1rem; font-weight: bold; color: #ffd700; margin-bottom: 10px; letter-spacing: 1px; }
 
 .thesis-avatar {
-    border: 3px solid #ffd700 !important; max-width: 155px !important; margin: 10px 0 !important;
+    border: 3px solid #ffd700 !important; max-width: 170px !important; margin: 10px 0 !important;
     box-shadow: 0 8px 20px rgba(0,0,0,0.4) !important;
 }
 
 .thesis-info-box { text-align: left; width: 100%; padding-left: 15px; margin-top: 5px; border-left: 2px solid #ffd700; }
-.thesis-info-box p { font-size: 0.8rem; margin: 4px 0; color: #ffffff; line-height: 1.4; }
+.thesis-info-box p { font-size: 0.8rem; margin: 5px 0; color: #ffffff; line-height: 1.3; }
 .thesis-info-box strong { color: #ffd700; }
 .thesis-footer { margin-top: auto; font-size: 0.8rem; font-weight: bold; color: #ffffff; }
 .flip-hint-gold { font-size: 0.7rem; color: #ffd700; margin-top: 5px; font-style: italic; animation: flash 2s infinite; }
 
-/* Các trang nội dung chữ bên trong */
+/* Nội dung trang trong */
 .title-text-small { font-family: 'Playfair Display', serif; color: #0077b6; font-size: 1.5rem; }
-.student-name { font-family: 'Playfair Display', serif; color: #2d3436; font-size: 1.5rem; margin-top: 10px; font-weight: 700; }
+.student-name { font-family: 'Playfair Display', serif; color: #2d3436; font-size: 1.6rem; margin-top: 10px; font-weight: 700; }
 .cloud-line { margin: 10px 0; color: #00b4d8; font-size: 0.8rem; }
-.heart-icon { font-size: 3rem; color: #e74c3c; animation: beat 1.5s infinite; display: inline-block; }
+.heart-icon { font-size: 3rem; color: #e74c3c; }
 
 .avatar-container {
-    width: 100%; max-width: 230px; border-radius: 12px; overflow: hidden;
+    width: 100%; max-width: 230px; border-radius: 15px; overflow: hidden;
     border: 5px solid #f8f9fa; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin: 15px 0;
 }
 .avatar { width: 100%; display: block; object-fit: cover; }
 
 .detail-box {
-    background: #e0f7fa; padding: 18px; border-radius: 12px; width: 100%; text-align: left; border-left: 5px solid #00acc1;
+    background: #e0f7fa; padding: 20px; border-radius: 15px; width: 100%; text-align: left; border-left: 5px solid #00acc1;
 }
-.detail-box p { font-size: 0.85rem; margin-bottom: 8px; line-height: 1.4; color: #2d3436; }
+.detail-box p { font-size: 0.9rem; margin-bottom: 10px; line-height: 1.4; color: #2d3436; }
 .detail-box i { color: #00acc1; width: 20px; }
-.address-text { font-size: 0.75rem !important; color: #636e72 !important; margin-top: -5px; padding-left: 20px; }
+.address-text { font-size: 0.8rem !important; color: #636e72 !important; margin-top: -5px; }
 
 .map-btn {
     display: block; background: #0077b6; color: white; text-decoration: none;
-    padding: 10px; border-radius: 8px; font-weight: bold; font-size: 0.8rem; text-align: center; margin-top: 10px;
-    box-shadow: 0 4px 10px rgba(0, 119, 182, 0.2);
+    padding: 12px; border-radius: 10px; font-weight: bold; font-size: 0.8rem; text-align: center; margin-top: 10px;
 }
 
-.quote-p { font-style: italic; color: #495057; font-size: 0.9rem; line-height: 1.5; margin-top: 5px; }
-.footer { font-size: 0.9rem; color: #212529; font-weight: bold; line-height: 1.6; }
-.flower-decor { margin-top: 15px; font-size: 1.2rem; }
+.quote-p { font-style: italic; color: #495057; font-size: 0.95rem; line-height: 1.5; margin-top: 10px; }
+.footer { font-size: 0.95rem; color: #212529; font-weight: bold; line-height: 1.6; }
+.flower-decor { margin-top: 20px; font-size: 1.2rem; }
 
-/* ☁️ HIỆU ỨNG MÂY TRÔI NỀN TRỜI ☁️ */
+/* Mây trang trí nền */
 #sky-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
 .bright-cloud {
     position: absolute; background: white; border-radius: 100px;
-    box-shadow: 0 10px 30px rgba(255,255,255,0.4); animation: drift linear infinite;
+    box-shadow: 0 10px 30px rgba(255,255,255,0.5); animation: drift linear infinite;
 }
 .bright-cloud::before, .bright-cloud::after { content: ''; position: absolute; background: white; border-radius: 50%; }
 .bright-cloud::before { width: 50%; height: 100%; top: -40%; left: 15%; }
 .bright-cloud::after { width: 30%; height: 60%; top: -25%; right: 15%; }
 
+.bright-star { position: absolute; font-size: 1.2rem; animation: flash linear infinite; pointer-events: none; }
+
 @keyframes drift { 0% { left: -200px; } 100% { left: 100vw; } }
-@keyframes flash { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
-@keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+@keyframes flash { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
 
 #music-toggle {
     position: fixed; top: 20px; right: 20px; width: 45px; height: 45px; border-radius: 50%;
-    border: none; background: #0077b6; color: white; z-index: 100; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    border: none; background: #0077b6; color: white; z-index: 100; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 .rotating { animation: spin 5s linear infinite; }
 @keyframes spin { 100% { transform: rotate(360deg); } }
 
-@media (max-width: 600px) {
-    .book-container { height: 75vh; padding: 5px; }
-    .page-content { padding: 15px 10px !important; }
-    .thesis-main-title { font-size: 1.3rem; }
-    .thesis-avatar { max-width: 105px !important; }
-    .thesis-border { margin: 5px; padding: 15px 5px !important; }
-    .avatar-container { max-width: 150px; margin: 5px 0; }
-    .detail-box { padding: 10px; }
+@media (max-height: 650px) {
+    .page-content { padding: 15px !important; }
+    .thesis-main-title { font-size: 1.6rem; }
+    .thesis-avatar { max-width: 130px !important; }
 }
