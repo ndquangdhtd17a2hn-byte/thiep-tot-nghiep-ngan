@@ -15,20 +15,21 @@ body {
 /* Khung bọc quyển sách cuốn đồ án 3D */
 .book-container {
     width: 100%;
-    max-width: 840px; 
+    max-width: 900px; /* Chừa khoảng trống tối đa khi mở đôi 2 trang */
     height: 85vh;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 10;
     padding: 20px;
-    perspective: 2000px; /* Tạo góc nhìn lập thể 3D sâu rộng */
+    perspective: 2000px; /* Chiều sâu lập thể 3D */
 }
 
 .flip-book {
     box-shadow: 0 35px 85px rgba(0, 0, 0, 0.45);
     background: #bbb;
     border-radius: 6px;
+    margin: 0 auto;
 }
 
 /* 📖 ĐỊNH DẠNG TRANG SÁCH MỞ GÓC CONG 45 ĐỘ 📖 */
@@ -37,7 +38,7 @@ body {
     overflow: hidden;
 }
 
-/* Tạo dải màu gradient tối dần sát gáy giả lập hai trang đang mở cong hướng 45 độ */
+/* Hiệu ứng chuyển màu gradient tối dần về gáy sách để tạo cảm giác uốn cong hướng 45 độ về người xem */
 .page-left {
     background: linear-gradient(to right, #ffffff 80%, #f4f4f4 92%, #cfcfcf 100%) !important;
 }
@@ -57,23 +58,24 @@ body {
     position: relative;
 }
 
-/* ✒️ NHẤN MẠNH ĐẬM ĐƯỜNG GÁY SÁCH GIỮA HAI TRANG ĐỂ PHÂN BIỆT RÕ RÀNG */
+/* ✒️ ĐƯỜNG VIỀN GiỮA 2 TRANG ĐẬM RÕ NÉT ĐỂ DỄ PHÂN BIỆT */
 .page-left .page-content {
-    border-right: 4px solid #1a1a1a; /* Đường xương gáy gờ trái siêu rõ và đậm */
-    box-shadow: inset -15px 0 25px rgba(0,0,0,0.18); /* Tạo lòng uốn cong */
+    border-right: 4px solid #1a1a1a; /* Thanh gáy trái màu đậm siêu rõ */
+    box-shadow: inset -15px 0 25px rgba(0,0,0,0.18); /* Đổ bóng lòng trong */
 }
 
 .page-right .page-content {
-    border-left: 4px solid #1a1a1a; /* Đường xương gáy gờ phải siêu rõ và đậm */
-    box-shadow: inset 15px 0 25px rgba(0,0,0,0.18); /* Tạo lòng uốn cong */
+    border-left: 4px solid #1a1a1a; /* Thanh gáy phải màu đậm siêu rõ */
+    box-shadow: inset 15px 0 25px rgba(0,0,0,0.18); /* Đổ bóng lòng trong */
 }
 
-/* 📘 THIẾT KẾ RIÊNG: BÌA ĐỒ ÁN MẠ VÀNG LỊCH THIỆP 📘 */
+/* 📘 THIẾT KẾ RIÊNG: BÌA ĐỒ ÁN MẠ VÀNG 📘 */
 .thesis-cover {
     background: #0f2b46 !important; 
     color: #ffd700;
 }
 
+/* Khi là trang bìa ngoài cùng đang đóng, giấu bóng lòng đi để phẳng phiu đẹp mắt */
 .thesis-cover .page-content {
     box-shadow: none !important;
     border: none !important;

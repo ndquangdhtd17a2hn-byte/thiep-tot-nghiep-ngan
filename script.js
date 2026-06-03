@@ -4,22 +4,21 @@ const skyContainer = document.getElementById('sky-container');
 
 let musicStarted = false;
 
-// Hàm kích hoạt phát nhạc nền ngay lập tức
+// Hàm kích hoạt nhạc nền
 function playMusic() {
     if (!musicStarted) {
         bgMusic.play().then(() => {
             musicStarted = true;
             musicToggle.classList.add('rotating');
-        }).catch(err => console.log("Chờ vuốt lật trang bìa để duyệt nhạc..."));
+        }).catch(err => console.log("Chờ tương tác vuốt lật để phát nhạc..."));
     }
 }
 
-// KHỞI TẠO CUỐN SÁCH: ĐÓNG BAN ĐẦU -> VUỐT LẬT MỞ ĐÔI 45 ĐỘ
 document.addEventListener('DOMContentLoaded', () => {
     if (typeof St !== 'undefined' && St.PageFlip) {
         const pageFlip = new St.PageFlip(document.getElementById('my-book'), {
-            width: 400,   
-            height: 600,  
+            width: 400,       // Chiều rộng của 1 trang giấy
+            height: 600,      // Chiều cao của 1 trang giấy
             size: "stretch",
             minWidth: 200,
             maxWidth: 450,
@@ -27,34 +26,26 @@ document.addEventListener('DOMContentLoaded', () => {
             maxHeight: 650,
             drawShadow: true, 
             
-            // 🌟 CẤU HÌNH THÔNG MINH CHO QUYỂN SÁCH ĐÓNG TỰ NHIÊN:
-            usePortrait: true,     // Bắt đầu bằng chế độ trang đơn (chỉ thấy trang bìa đơn khi đóng sách)
-            autoSize: true,
+            // 🌟 CẤU HÌNH QUAN TRỌNG ĐỂ ĐÓNG SÁCH BAN ĐẦU 🌟
+            mode: "landscape",   // Vẫn giữ chế độ xem đôi cho nội dung bên trong
+            showCover: true,     // ÉP TRANG ĐẦU TIÊN (TRANG BÌA) PHẢI ĐÓNG KHÍT LẠI CHỈ HIỆN 1 TRANG
             
-            startPage: 0,
+            clickEventForward: true,
+            useMouseEvents: true
         });
 
-        // Nạp các trang giấy vào hệ thống
+        // Nạp các trang giấy từ HTML
         pageFlip.loadFromHTML(document.querySelectorAll('.page'));
 
-        // 🌟 BẮT SỰ KIỆN QUAN TRỌNG: Khách vừa chạm vuốt mở trang bìa đầu tiên!
+        // Sự kiện xảy ra khi người dùng lật trang
         pageFlip.on('flip', (e) => {
-            // 1. Kích hoạt phát nhạc ngay tức khắc khi trang bìa chuyển động
+            // Kích hoạt nhạc ngay lập tức khi trang bìa vừa dịch chuyển
             playMusic();
-            
-            // 2. Chuyển sách sang hiển thị chế độ ĐÔI (landscape) để lộ góc cong 45 độ và gáy giữa đậm sắc nét!
-            if (e.data === 1) {
-                pageFlip.update({ usePortrait: false });
-            }
-            // Nếu khách lật ngược quay lại trang bìa ngoài cùng -> Đóng sách lại gọn gàng
-            if (e.data === 0) {
-                pageFlip.update({ usePortrait: true });
-            }
         });
     }
 });
 
-// Hàm tạo hiệu ứng mây trôi lững lờ dưới nền trời
+// Hiệu ứng đám mây trôi dưới nền
 function createClouds() {
     for (let i = 0; i < 8; i++) {
         const cloud = document.createElement('div');
@@ -70,7 +61,7 @@ function createClouds() {
 }
 createClouds();
 
-// Điều khiển nhạc bằng đĩa xoay thủ công cố định
+// Nút đĩa nhạc thủ công
 musicToggle.addEventListener('click', () => {
     if (bgMusic.paused) {
         bgMusic.play();
