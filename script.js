@@ -7,60 +7,60 @@ const skyContainer = document.getElementById('sky-container');
 
 let musicStarted = false;
 
-// Hàm tạo hiệu ứng Mây trắng và Sao vàng CÙNG BAY lững lờ sinh động
+// Hàm tạo hiệu ứng Mây trắng và Sao vàng trôi tự nhiên tạo chiều sâu không gian
 function startSkyAnimation() {
-    if (skyContainer.children.length > 0) return; // Tránh tạo trùng lặp khi lật trang
+    if (skyContainer.children.length > 0) return; 
     
-    // Tạo 12 đám mây trắng to nhỏ khác nhau trôi ngang
-    for (let i = 0; i < 12; i++) {
+    // Tạo mây trôi nhẹ nhàng với độ mờ ngẫu nhiên
+    for (let i = 0; i < 10; i++) {
         const cloud = document.createElement('div');
         cloud.classList.add('bright-cloud');
-        const width = Math.random() * 80 + 60; // từ 60px đến 140px
+        const width = Math.random() * 100 + 70; 
         cloud.style.width = width + 'px';
         cloud.style.height = (width * 0.4) + 'px';
-        cloud.style.top = Math.random() * 80 + 'vh'; 
-        cloud.style.animationDuration = Math.random() * 20 + 25 + 's'; 
-        cloud.style.animationDelay = Math.random() * -25 + 's'; 
+        cloud.style.top = Math.random() * 75 + 'vh'; 
+        cloud.style.animationDuration = Math.random() * 25 + 30 + 's'; 
+        cloud.style.animationDelay = Math.random() * -30 + 's';
+        cloud.style.opacity = Math.random() * 0.4 + 0.5;
         skyContainer.appendChild(cloud);
     }
 
-    // TỐI ƯU: Tạo 15 ngôi sao lấp lánh CÙNG BAY liên tục giống mây
+    // Tạo sao lấp lánh kết hợp di chuyển sinh động
     for (let i = 0; i < 15; i++) {
         const star = document.createElement('div');
         star.classList.add('bright-star');
         star.innerHTML = Math.random() > 0.5 ? '✨' : '⭐️';
-        star.style.fontSize = Math.random() * 10 + 12 + 'px';
-        star.style.top = Math.random() * 85 + 'vh';
+        star.style.fontSize = Math.random() * 8 + 12 + 'px';
+        star.style.top = Math.random() * 80 + 'vh';
         
-        // Gán hoạt ảnh drift (bay ngang) kết hợp starPulse (nhấp nháy phóng to)
-        star.style.animation = `drift ${Math.random() * 15 + 20}s linear infinite, starPulse ${Math.random() * 2 + 1}s ease-in-out infinite alternate`;
-        star.style.animationDelay = Math.random() * -20 + 's';
+        star.style.animation = `drift ${Math.random() * 20 + 25}s linear infinite, starPulse ${Math.random() * 2 + 1.5}s ease-in-out infinite alternate`;
+        star.style.animationDelay = Math.random() * -25 + 's';
         
         skyContainer.appendChild(star);
     }
 }
 
-// Khởi tạo thư viện lật sách PageFlip chuyên sâu
+// Khởi tạo thư viện lật sách PageFlip chuyên sâu tạo độ cong mềm mại
 function initBookFlip() {
     if (typeof St !== 'undefined' && St.PageFlip) {
         const pageFlip = new St.PageFlip(document.getElementById('my-book'), {
-            width: 400,          // Chiều rộng của 1 trang (px)
-            height: 580,         // Chiều cao của 1 trang (px)
+            width: 400,          
+            height: 580,         
             size: "stretch",
-            minWidth: 260,
+            minWidth: 300,
             maxWidth: 450,
-            minHeight: 400,
+            minHeight: 450,
             maxHeight: 650,
             
-            // 🌟 CẤU HÌNH LẬT CONG MÉP GIẤY YỂU ĐIỆU & ĐỔ BÓNG 3D 🌟
-            drawShadow: true,        // Kích hoạt vẽ bóng nếp gấp khi lật
-            flippingTime: 1200,      // Thời gian lật (1.2 giây) tạo chuyển động uốn giấy lướt mượt
-            tiltAngle: 30,           // Độ nghiêng bẻ cong góc mép giấy rất điệu khi kéo vuốt
-            swipeDistance: 25,       // Độ nhạy tương tác vuốt
-            maxShadowOpacity: 0.5,   // Tăng độ sâu bóng đổ lập thể nội bộ trang
+            // 🌟 CẤU HÌNH GÓC LẬT VÀ ĐỔ BÓNG 3D MỀM MẠI 🌟
+            drawShadow: true,        // Đổ bóng nếp gấp giấy khi mở trang
+            flippingTime: 1000,      // Thời gian lật (1 giây) vừa vặn mượt mà
+            tiltAngle: 20,           // Giảm góc nghiêng giúp trang sách cuộn cong tự nhiên không bị gãy góc
+            swipeDistance: 30,       
+            maxShadowOpacity: 0.6,   // Độ đậm bóng đổ vừa vặn để tạo khối 3D sâu
             
-            mode: "landscape",       // Chế độ mở đôi hai bên như quyển sách thật
-            showCover: true,         // Giữ trang bìa nằm chính giữa lúc ban đầu
+            mode: "landscape",       // Chế độ mở đôi quyển sách
+            showCover: true,         // Giữ trang bìa ở giữa lúc bắt đầu
             
             clickEventForward: true,
             useMouseEvents: true 
@@ -70,25 +70,27 @@ function initBookFlip() {
     }
 }
 
-// Click nút mở thiệp
+// Sự kiện click nút mở thiệp mời
 openBtn.addEventListener('click', () => {
     welcomeScreen.style.opacity = '0';
     setTimeout(() => {
         welcomeScreen.classList.add('hidden');
         mainContent.classList.remove('hidden');
+        mainContent.style.opacity = '0';
+        setTimeout(() => { mainContent.style.opacity = '1'; }, 50);
         
-        // Chạy nhạc và hoạt ảnh nền
+        // Phát nhạc nền tự động sau tương tác người dùng
         bgMusic.play().then(() => {
             musicStarted = true;
             musicToggle.classList.add('rotating');
-        }).catch(e => console.log("Hệ thống chờ tương tác để phát nhạc:", e));
+        }).catch(e => console.log("Hệ thống chờ người dùng nhấn nút để phát nhạc:", e));
         
         startSkyAnimation();
-        initBookFlip(); // Kích hoạt hiệu ứng lật sách 3D ngay khi vào giao diện chính
+        initBookFlip(); 
     }, 800);
 });
 
-// Điều khiển nhạc thủ công
+// Điều khiển bật/tắt nhạc bằng nút góc màn hình
 musicToggle.addEventListener('click', () => {
     if (bgMusic.paused) {
         bgMusic.play();

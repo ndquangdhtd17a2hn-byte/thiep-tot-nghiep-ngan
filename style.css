@@ -4,7 +4,7 @@
 
 body {
     font-family: 'Comfortaa', cursive, sans-serif;
-    background: linear-gradient(180deg, #4ea8de 0%, #56ccf2 50%, #74ebd5 100%);
+    background: linear-gradient(135deg, #2b5876 0%, #4e4376 100%); 
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -12,7 +12,6 @@ body {
     overflow: hidden;
 }
 
-/* Toàn màn hình sau khi bấm mở */
 #main-content {
     width: 100%;
     height: 100vh;
@@ -21,59 +20,56 @@ body {
     align-items: center;
     position: relative;
     z-index: 5;
+    transition: opacity 1s ease-in-out;
 }
 
-/* 🌟 KHUNG CHỨA SÁCH: MỞ RỘNG ĐỂ MỞ ĐÔI TRANG NGANG 🌟 */
+/* KHUNG CHỨA SÁCH */
 .book-container {
     width: 100%;
-    max-width: 900px; /* Tăng max-width để chứa đủ 2 trang mở đôi (400px * 2) */
+    max-width: 920px; 
     height: 85vh;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 10;
-    perspective: 2500px; /* Tạo chiều sâu không gian lập thể */
+    perspective: 3000px; 
 }
 
-/* 🌟 SIÊU ĐỔ BÓNG ĐA TẦNG CHO KHỐI ĐỒ ÁN 3D CHÂN THỰC 🌟 */
+/* ĐỔ BÓNG ĐA TẦNG CHO CUỐN SÁCH */
 .flip-book {
     box-shadow: 
-        0 15px 35px rgba(0, 0, 0, 0.25), 
-        0 30px 60px rgba(0, 0, 0, 0.35), 
-        0 50px 100px rgba(0, 0, 0, 0.5),
-        inset 0 0 40px rgba(0, 0, 0, 0.08);
+        0 20px 50px rgba(0, 0, 0, 0.4), 
+        0 40px 80px rgba(0, 0, 0, 0.3), 
+        inset 0 0 50px rgba(0, 0, 0, 0.1);
     background: transparent;
-    border-radius: 12px;
+    border-radius: 8px;
 }
 
-/* Cấu trúc trang giấy bắt buộc cho PageFlip */
+/* Định dạng chung trang giấy */
 .page {
-    background-color: #ffffff;
+    background-color: #f9f9f6; 
     overflow: hidden;
+    height: 100%;
 }
 
-/* 📖 GIẢ LẬP ĐỘ TRŨNG CONG NẾP GẤP SÁT GÁY 📖 */
-/* Trang bên trái tối dần về bên phải */
+/* HIỆU ỨNG ĐỘ TRŨNG CONG NẾP GẤP SÁT GÁY SÁCH */
 .page-left {
-    background: linear-gradient(to right, #ffffff 75%, #f0f0f0 88%, #cccccc 96%, #333333 100%) !important;
+    background: linear-gradient(to right, #f9f9f6 80%, #eaeaea 92%, #d5d5d5 97%, #555555 100%) !important;
 }
 .page-left .page-content {
-    border-right: 3px solid rgba(0, 0, 0, 0.3);
-    box-shadow: inset -25px 0 35px rgba(0, 0, 0, 0.15);
+    box-shadow: inset -15px 0 25px rgba(0, 0, 0, 0.08);
 }
 
-/* Trang bên phải tối dần về bên trái */
 .page-right {
-    background: linear-gradient(to left, #ffffff 75%, #f0f0f0 88%, #cccccc 96%, #333333 100%) !important;
+    background: linear-gradient(to left, #f9f9f6 80%, #eaeaea 92%, #d5d5d5 97%, #555555 100%) !important;
 }
 .page-right .page-content {
-    border-left: 3px solid rgba(0, 0, 0, 0.3);
-    box-shadow: inset 25px 0 35px rgba(0, 0, 0, 0.15);
+    box-shadow: inset 15px 0 25px rgba(0, 0, 0, 0.08);
 }
 
 .page-content {
     width: 100%; height: 100%;
-    padding: 30px 25px;
+    padding: 35px 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -82,124 +78,148 @@ body {
     position: relative;
 }
 
-/* BÌA ĐỒ ÁN SANG TRỌNG */
+/* THIẾT KẾ BÌA THEO MẪU ẢNH BÌA SỔ CỬ NHÂN */
 .thesis-cover {
-    background: #0f2b46 !important; 
-    color: #ffd700;
+    background: #112a46 !important; 
+    color: #dfb74c; 
 }
 .thesis-cover .page-content {
     border: none !important;
-    box-shadow: inset -15px 0 25px rgba(0,0,0,0.45) !important;
-    background: #0f2b46 !important;
+    background: #112a46 !important;
+    box-shadow: inset -25px 0 40px rgba(0,0,0,0.6) !important;
+    padding: 20px !important;
 }
 .thesis-border {
-    border: 4px double #ffd700; margin: 10px;
-    height: calc(100% - 20px) !important; width: calc(100% - 20px) !important;
-    padding: 20px 15px !important; position: relative;
+    border: 2px solid #dfb74c;
+    margin: 5px;
+    height: calc(100% - 10px) !important;
+    width: calc(100% - 10px) !important;
+    padding: 30px 15px !important;
+    position: relative;
 }
 .thesis-border::before {
-    content: ''; position: absolute; top: 5px; left: 5px; right: 5px; bottom: 5px;
-    border: 1px solid rgba(255, 215, 0, 0.4); pointer-events: none;
+    content: ''; position: absolute; top: 4px; left: 4px; right: 4px; bottom: 4px;
+    border: 1px solid #dfb74c; pointer-events: none; opacity: 0.8;
 }
 
-.ministry-title { font-size: 0.75rem; font-weight: bold; letter-spacing: 1px; color: #ffffff; }
-.university-title { font-size: 0.8rem; font-weight: bold; margin-top: 5px; color: #ffd700; letter-spacing: 0.5px; }
-.thesis-decor-line { font-size: 0.6rem; margin: 8px 0; color: #ffd700; }
-.thesis-main-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; letter-spacing: 2px; color: #ffffff; margin-top: 10px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-.thesis-sub-title { font-size: 0.95rem; font-weight: bold; color: #ffd700; margin-bottom: 10px; letter-spacing: 1px; }
-
-.thesis-avatar {
-    border: 3px solid #ffd700 !important; max-width: 160px !important; margin: 10px 0 !important;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.4) !important;
+/* Họa tiết Logo & Text trên bìa */
+.hnue-logo-emblem {
+    color: #dfb74c; font-size: 1.8rem; margin-bottom: 2px;
+    display: flex; flex-direction: column; align-items: center;
 }
-.thesis-info-box { text-align: left; width: 100%; padding-left: 12px; margin-top: 5px; border-left: 2px solid #ffd700; }
-.thesis-info-box p { font-size: 0.75rem; margin: 5px 0; color: #ffffff; line-height: 1.3; }
-.thesis-info-box strong { color: #ffd700; }
-.thesis-footer { margin-top: auto; font-size: 0.75rem; font-weight: bold; color: #ffffff; }
-.flip-hint-gold { font-size: 0.7rem; color: #ffd700; margin-top: 5px; font-style: italic; animation: flash 2s infinite; }
+.hnue-text-sm { font-size: 0.7rem; font-weight: bold; margin-top: -2px; letter-spacing: 1px; }
+.university-title { font-size: 0.9rem; font-weight: 700; color: #ffffff; letter-spacing: 0.5px; margin-top: 5px; }
+.thesis-decor-line { color: #dfb74c; font-size: 0.6rem; margin: 5px 0 12px 0; letter-spacing: 3px; }
+.thesis-main-title { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 900; letter-spacing: 1px; color: #dfb74c; text-shadow: 0 2px 4px rgba(0,0,0,0.4); }
+.thesis-sub-title { font-size: 0.95rem; font-weight: 700; color: #ffffff; margin-top: 5px; margin-bottom: 15px; letter-spacing: 0.5px; }
 
-/* Nội dung trang trong */
-.title-text-small { font-family: 'Playfair Display', serif; color: #0077b6; font-size: 1.5rem; }
+/* KHỐI KHUNG ẢNH TRÒN VÀ CÀNH NGUYỆT QUẾ ĐẸP */
+.emblem-container {
+    position: relative; width: 100%; max-width: 190px; margin: 10px 0;
+    display: flex; flex-direction: column; align-items: center;
+}
+.avatar-circle-frame {
+    width: 150px; height: 150px; border-radius: 50%; border: 3px solid #dfb74c;
+    overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.4); z-index: 2; background: #fff;
+}
+.avatar-circle { width: 100%; height: 100%; object-fit: cover; }
+.laurel-wreath { position: absolute; bottom: -12px; width: 110%; display: flex; flex-direction: column; align-items: center; z-index: 3; }
+.cap-icon { font-size: 1.8rem; color: #dfb74c; background: #112a46; padding: 0 8px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+.wreath-icons { display: flex; justify-content: space-between; width: 100%; margin-top: -10px; font-size: 1.3rem; color: #dfb74c; opacity: 0.9; }
+.left-leaf { transform: rotate(40deg); }
+.right-leaf { transform: rotate(-40deg) scaleX(-1); }
+.slogan-text { font-size: 0.75rem; font-weight: 700; color: #dfb74c; margin-top: 25px; letter-spacing: 1px; word-spacing: 2px; }
+
+/* Chân trang bìa */
+.thesis-footer { margin-top: auto; width: 100%; }
+.flip-hint-gold { font-size: 0.8rem; color: #ffffff; font-weight: bold; letter-spacing: 1px; animation: flash 2s infinite; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.flip-hint-gold i { color: #dfb74c; font-size: 0.85rem; }
+
+/* Các trang nội dung bên trong */
+.title-text-small { font-family: 'Playfair Display', serif; color: #0f2b46; font-size: 1.6rem; font-weight: 700; border-bottom: 2px solid #dfb74c; padding-bottom: 5px; }
 .student-name { font-family: 'Playfair Display', serif; color: #2d3436; font-size: 1.6rem; margin-top: 10px; font-weight: 700; }
-.cloud-line { margin: 10px 0; color: #00b4d8; font-size: 0.8rem; }
-.heart-icon { font-size: 3rem; color: #e74c3c; }
+.cloud-line { margin: 12px 0; color: #00b4d8; font-size: 0.8rem; letter-spacing: 2px; }
+.heart-icon { font-size: 3.5rem; color: #e74c3c; animation: pulse 1.5s infinite alternate; }
 
 .avatar-container {
-    width: 100%; max-width: 220px; border-radius: 15px; overflow: hidden;
-    border: 5px solid #f8f9fa; box-shadow: 0 10px 25px rgba(0,0,0,0.12); margin: 15px 0;
+    width: 100%; max-width: 200px; border-radius: 12px; overflow: hidden;
+    border: 4px solid #ffffff; box-shadow: 0 12px 25px rgba(0,0,0,0.15); margin: 15px 0;
+    transition: transform 0.3s ease;
 }
+.avatar-container:hover { transform: scale(1.03); }
 .avatar { width: 100%; display: block; object-fit: cover; }
 
 .detail-box {
-    background: #e0f7fa; padding: 20px; border-radius: 15px; width: 100%; text-align: left; border-left: 5px solid #00acc1;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    background: #f0f7f4; padding: 20px; border-radius: 12px; width: 100%; text-align: left; border-left: 5px solid #0f2b46;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
 }
-.detail-box p { font-size: 0.85rem; margin-bottom: 10px; line-height: 1.4; color: #2d3436; }
-.detail-box i { color: #00acc1; width: 20px; }
-.address-text { font-size: 0.75rem !important; color: #636e72 !important; margin-top: -5px; }
+.detail-box p { font-size: 0.85rem; margin-bottom: 12px; line-height: 1.5; color: #2d3436; }
+.detail-box i { color: #0f2b46; width: 22px; font-size: 0.95rem; }
+.address-text { font-size: 0.75rem !important; color: #636e72 !important; margin-top: -8px; padding-left: 22px; }
 
 .map-btn {
-    display: block; background: #0077b6; color: white; text-decoration: none;
-    padding: 12px; border-radius: 10px; font-weight: bold; font-size: 0.8rem; text-align: center; margin-top: 10px;
+    display: block; background: #0f2b46; color: white; text-decoration: none;
+    padding: 12px; border-radius: 8px; font-weight: bold; font-size: 0.8rem; text-align: center; margin-top: 15px;
+    box-shadow: 0 5px 15px rgba(15,43,70,0.3); transition: all 0.3s ease;
 }
-
-.quote-p { font-style: italic; color: #495057; font-size: 0.9rem; line-height: 1.5; margin-top: 10px; }
-.footer { font-size: 0.9rem; color: #212529; font-weight: bold; line-height: 1.6; }
+.map-btn:hover { background: #17426c; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(15,43,70,0.4); }
+.quote-p { font-style: italic; color: #495057; font-size: 0.95rem; line-height: 1.6; margin-top: 15px; padding: 0 10px; }
+.footer { font-size: 0.95rem; color: #212529; font-weight: bold; line-height: 1.6; }
 .flower-decor { margin-top: 20px; font-size: 1.2rem; }
 
-/* 🌟 HOẠT ẢNH MÂY VÀ SAO DI CHUYỂN ĐỒNG BỘ 🌟 */
+/* HOẠT ẢNH NỀN MÂY SAO BAY LỮNG LỜ TRÔI ÊM ÁI */
 #sky-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
 .bright-cloud {
-    position: absolute; background: white; border-radius: 100px;
-    box-shadow: 0 10px 30px rgba(255,255,255,0.5); animation: drift linear infinite;
+    position: absolute; background: rgba(255, 255, 255, 0.85); border-radius: 100px;
+    filter: blur(1px); box-shadow: 0 8px 25px rgba(255,255,255,0.4); animation: drift linear infinite;
 }
-.bright-cloud::before, .bright-cloud::after { content: ''; position: absolute; background: white; border-radius: 50%; }
+.bright-cloud::before, .bright-cloud::after { content: ''; position: absolute; background: rgba(255, 255, 255, 0.85); border-radius: 50%; }
 .bright-cloud::before { width: 50%; height: 100%; top: -40%; left: 15%; }
 .bright-cloud::after { width: 30%; height: 60%; top: -25%; right: 15%; }
+.bright-star { position: absolute; z-index: 2; pointer-events: none; }
 
-/* Style của ngôi sao di chuyển */
-.bright-star { 
-    position: absolute; 
-    z-index: 2; 
-    pointer-events: none; 
-}
-
-/* Định nghĩa các chuyển động tịnh tiến qua màn hình */
 @keyframes drift { 
-    0% { left: -160px; } 
-    100% { left: 100vw; } 
+    0% { transform: translateX(-200px); } 
+    100% { transform: translateX(100vw); } 
 }
 @keyframes starPulse { 
-    0% { opacity: 0.3; transform: scale(0.8); } 
-    100% { opacity: 1; transform: scale(1.3); } 
+    0% { opacity: 0.2; transform: scale(0.7); } 
+    100% { opacity: 1; transform: scale(1.2); } 
 }
 @keyframes flash { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+@keyframes pulse { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
 
-/* Khung màn hình chào ẩn/hiện mượt */
+/* Khung màn hình chào */
 #welcome-screen {
     position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-    background: #0f2b46; display: flex; flex-direction: column;
+    background: radial-gradient(circle, #103152 0%, #061524 100%); display: flex; flex-direction: column;
     justify-content: center; align-items: center; z-index: 100;
-    transition: opacity 0.8s ease;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 #open-btn {
-    padding: 15px 40px; font-size: 1.2rem; background: #ffd700;
+    padding: 16px 45px; font-size: 1.2rem; background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
     color: #0f2b46; border: none; border-radius: 30px; cursor: pointer;
-    font-weight: bold; box-shadow: 0 10px 25px rgba(255,215,0,0.3);
-    margin-top: 20px; transition: transform 0.2s;
+    font-weight: bold; box-shadow: 0 10px 30px rgba(255,215,0,0.4);
+    margin-top: 30px; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-#open-btn:hover { transform: scale(1.05); }
-.hidden { display: none !important; }
+#open-btn:hover { transform: scale(1.08) translateY(-3px); box-shadow: 0 15px 35px rgba(255,215,0,0.6); }
 
 #music-toggle {
     position: fixed; top: 20px; right: 20px; width: 45px; height: 45px; border-radius: 50%;
-    border: none; background: #0077b6; color: white; z-index: 100; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    border: none; background: #ffffff; color: #0f2b46; z-index: 100; cursor: pointer; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3); font-size: 1.2rem; transition: transform 0.2s;
 }
-.rotating { animation: spin 5s linear infinite; }
+#music-toggle:hover { transform: scale(1.1); }
+.rotating { animation: spin 6s linear infinite; }
 @keyframes spin { 100% { transform: rotate(360deg); } }
 
-@media (max-height: 650px) {
-    .page-content { padding: 15px !important; }
-    .thesis-main-title { font-size: 1.5rem; }
-    .thesis-avatar { max-width: 120px !important; }
+.hidden { display: none !important; }
+
+/* Responsive tối ưu màn hình */
+@media (max-height: 680px) {
+    .page-content { padding: 20px 15px !important; }
+    .thesis-main-title { font-size: 1.6rem; }
+    .emblem-container { max-width: 150px; }
+    .avatar-circle-frame { width: 110px; height: 110px; }
+    .title-text-small { font-size: 1.3rem; }
 }
