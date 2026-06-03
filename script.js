@@ -7,11 +7,9 @@ const skyContainer = document.getElementById('sky-container');
 
 let musicStarted = false;
 
-// Hàm tạo hiệu ứng Mây trắng và Sao vàng trôi tự nhiên tạo chiều sâu không gian
 function startSkyAnimation() {
     if (skyContainer.children.length > 0) return; 
     
-    // Tạo mây trôi nhẹ nhàng với độ mờ ngẫu nhiên
     for (let i = 0; i < 10; i++) {
         const cloud = document.createElement('div');
         cloud.classList.add('bright-cloud');
@@ -25,7 +23,6 @@ function startSkyAnimation() {
         skyContainer.appendChild(cloud);
     }
 
-    // Tạo sao lấp lánh kết hợp di chuyển sinh động
     for (let i = 0; i < 15; i++) {
         const star = document.createElement('div');
         star.classList.add('bright-star');
@@ -40,7 +37,6 @@ function startSkyAnimation() {
     }
 }
 
-// Khởi tạo thư viện lật sách PageFlip chuyên sâu tạo độ cong mềm mại
 function initBookFlip() {
     if (typeof St !== 'undefined' && St.PageFlip) {
         const pageFlip = new St.PageFlip(document.getElementById('my-book'), {
@@ -52,15 +48,14 @@ function initBookFlip() {
             minHeight: 450,
             maxHeight: 650,
             
-            // 🌟 CẤU HÌNH GÓC LẬT VÀ ĐỔ BÓNG 3D MỀM MẠI 🌟
-            drawShadow: true,        // Đổ bóng nếp gấp giấy khi mở trang
-            flippingTime: 1000,      // Thời gian lật (1 giây) vừa vặn mượt mà
-            tiltAngle: 20,           // Giảm góc nghiêng giúp trang sách cuộn cong tự nhiên không bị gãy góc
+            drawShadow: true,        
+            flippingTime: 1000,      
+            tiltAngle: 20,           
             swipeDistance: 30,       
-            maxShadowOpacity: 0.6,   // Độ đậm bóng đổ vừa vặn để tạo khối 3D sâu
+            maxShadowOpacity: 0.6,   
             
-            mode: "landscape",       // Chế độ mở đôi quyển sách
-            showCover: true,         // Giữ trang bìa ở giữa lúc bắt đầu
+            mode: "landscape",       
+            showCover: true,         
             
             clickEventForward: true,
             useMouseEvents: true 
@@ -70,7 +65,6 @@ function initBookFlip() {
     }
 }
 
-// Sự kiện click nút mở thiệp mời
 openBtn.addEventListener('click', () => {
     welcomeScreen.style.opacity = '0';
     setTimeout(() => {
@@ -79,18 +73,16 @@ openBtn.addEventListener('click', () => {
         mainContent.style.opacity = '0';
         setTimeout(() => { mainContent.style.opacity = '1'; }, 50);
         
-        // Phát nhạc nền tự động sau tương tác người dùng
         bgMusic.play().then(() => {
             musicStarted = true;
             musicToggle.classList.add('rotating');
-        }).catch(e => console.log("Hệ thống chờ người dùng nhấn nút để phát nhạc:", e));
+        }).catch(e => console.log("Hệ thống chờ tương tác:", e));
         
         startSkyAnimation();
         initBookFlip(); 
     }, 800);
 });
 
-// Điều khiển bật/tắt nhạc bằng nút góc màn hình
 musicToggle.addEventListener('click', () => {
     if (bgMusic.paused) {
         bgMusic.play();
