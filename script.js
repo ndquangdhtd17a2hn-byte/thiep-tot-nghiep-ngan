@@ -1,77 +1,72 @@
-const welcomeScreen = document.getElementById('welcome-screen');
-const mainContent = document.getElementById('main-content');
-const openBtn = document.getElementById('open-btn');
 const bgMusic = document.getElementById('bg-music');
 const musicToggle = document.getElementById('music-toggle');
 const skyContainer = document.getElementById('sky-container');
 
-const scrollUp = document.getElementById('scroll-up');
-const scrollDown = document.getElementById('scroll-down');
-const page1 = document.getElementById('page-1');
-const page2 = document.getElementById('page-2');
+let musicStarted = false;
 
-// Hàm tạo hiệu ứng Mây trắng xốp 3D và Sao vàng tươi mới bay lững lờ
-function startSkyAnimation() {
-    // Tạo 12 đám mây trắng to nhỏ khác nhau
-    for (let i = 0; i < 12; i++) {
-        const cloud = document.createElement('div');
-        cloud.classList.add('bright-cloud');
-        
-        // Tạo kích thước ngẫu nhiên cho đám mây sinh động
-        const width = Math.random() * 80 + 60; // từ 60px đến 140px
-        const height = width * 0.4;
-        cloud.style.width = width + 'px';
-        cloud.style.height = height + 'px';
-        
-        cloud.style.top = Math.random() * 85 + 'vh'; 
-        cloud.style.animationDuration = Math.random() * 20 + 20 + 's'; // Tốc độ trôi lững lờ
-        cloud.style.animationDelay = Math.random() * -25 + 's'; // Để mây xuất hiện rải rác ngay từ đầu
-        
-        skyContainer.appendChild(cloud);
-    }
-
-    // Tạo 15 ngôi sao vàng lấp lánh đi kèm
-    for (let i = 0; i < 15; i++) {
-        const star = document.createElement('div');
-        star.classList.add('bright-star');
-        star.innerHTML = Math.random() > 0.5 ? '✨' : '⭐️';
-        
-        star.style.top = Math.random() * 90 + 'vh';
-        star.style.animationDuration = Math.random() * 15 + 20 + 's';
-        star.style.animationDelay = Math.random() * -20 + 's';
-        
-        skyContainer.appendChild(star);
+// Hàm kích hoạt nhạc khi người dùng tương tác lật trang sách
+function playMusic() {
+    if (!musicStarted) {
+        bgMusic.play().then(() => {
+            musicStarted = true;
+            musicToggle.classList.add('rotating');
+        }).catch(err => console.log("Trình duyệt đợi thao tác lật trang mạnh hơn để phát nhạc..."));
     }
 }
 
-// Click nút mở thiệp
-openBtn.addEventListener('click', () => {
-    welcomeScreen.style.opacity = '0';
-    setTimeout(() => {
-        welcomeScreen.classList.add('hidden');
-        mainContent.classList.remove('hidden');
-        
-        bgMusic.play().catch(e => console.log("Lỗi duyệt chặn nhạc tự động:", e));
-        startSkyAnimation();
-    }, 800);
+// KHỞI TẠO HIỆU ỨNG LẬT SÁCH 3D SAU KHI TẢI TRANG
+document.addEventListener('DOMContentLoaded', () => {
+    // Kiểm tra xem thư viện St đã sẵn sàng chưa để tránh crash code
+    if (typeof St !== 'undefined' && St.PageFlip) {
+        const pageFlip = new St.PageFlip(document.getElementById('my-book'), {
+            width: 400,
+            height: 600,
+            size: "stretch",
+            minWidth: 300,
+            maxWidth: 450,
+            minHeight: 450,
+            maxHeight: 700,
+            drawShadow: true,   // Đổ bóng tạo nếp gấp 3D ở gáy sách cực chân thật
+            usePortrait: true,  // Bắt buộc hiển thị dạng trang đơn dọc để đẹp nhất trên điện thoại
+            startPage: 0,
+        });
+
+        // Nạp tất cả các trang (.page) có trong file HTML của Ngân vào hệ thống sách
+        pageFlip.loadFromHTML(document.querySelectorAll('.page'));
+
+        // BẮT SỰ KIỆN: Khách vừa vuốt tay lật trang -> Kích hoạt nhạc Young and Beautiful ngay lập tức!
+        pageFlip.on('flip', (e) => {
+            playMusic();
+        });
+    } else {
+        console.error("Lỗi: Không tải được thư viện lật trang PageFlip từ CDN. Vui lòng kiểm tra kết nối mạng!");
+    }
 });
 
-// Click nút điều khiển nhạc thủ công
+// Hàm tạo bầu trời mây trắng và sao lấp lánh trôi lững lờ dưới nền
+function createClouds() {
+    for (let i = 0; i < 8; i++) {
+        const cloud = document.createElement('div');
+        cloud.className = 'bright-cloud';
+        const w = Math.random() * 100 + 60;
+        cloud.style.width = w + 'px';
+        cloud.style.height = (w * 0.4) + 'px';
+        cloud.style.top = Math.random() * 90 + 'vh';
+        cloud.style.animationDuration = Math.random() * 20 + 20 + 's';
+        cloud.style.animationDelay = Math.random() * -20 + 's';
+        skyContainer.appendChild(cloud);
+    }
+}
+createClouds();
+
+// Xử lý bật/tắt nhạc thủ công khi bấm vào đĩa nhạc tròn
 musicToggle.addEventListener('click', () => {
     if (bgMusic.paused) {
         bgMusic.play();
         musicToggle.classList.add('rotating');
+        musicStarted = true;
     } else {
         bgMusic.pause();
         musicToggle.classList.remove('rotating');
     }
-});
-
-// Bấm nút di chuyển Lên/Xuống
-scrollDown.addEventListener('click', () => {
-    page2.scrollIntoView({ behavior: 'smooth' });
-});
-
-scrollUp.addEventListener('click', () => {
-    page1.scrollIntoView({ behavior: 'smooth' });
 });
