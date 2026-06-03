@@ -4,6 +4,7 @@
 
 body {
     font-family: 'Comfortaa', cursive, sans-serif;
+    /* Nền trời gradient xanh mát trong trẻo */
     background: linear-gradient(180deg, #4ea8de 0%, #56ccf2 50%, #74ebd5 100%);
     min-height: 100vh;
     display: flex;
@@ -12,67 +13,65 @@ body {
     overflow: hidden;
 }
 
-/* Container quyển sách */
+/* Khung bọc quyển sách cuốn đồ án */
 .book-container {
     width: 100%;
-    max-width: 400px;
+    max-width: 800px; /* Tăng chiều rộng tối đa để chứa được 2 trang mở đôi song song */
     height: 85vh;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 10;
+    padding: 20px;
 }
 
 .flip-book {
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4);
     background: white;
-    border-radius: 10px;
+    border-radius: 8px;
 }
 
-/* Trang giấy cơ bản */
+/* Định dạng trang giấy cơ bản bên trong */
 .page {
     background-color: #ffffff;
     overflow: hidden;
-    border-right: 1px solid rgba(0,0,0,0.05);
 }
 
 .page-content {
     width: 100%; height: 100%;
-    padding: 30px 20px;
+    padding: 30px 25px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    border-left: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-/* 📘 THIẾT KẾ RIÊNG CHO TRANG BÌA ĐỒ ÁN SANG TRỌNG 📘 */
+/* 📘 THIẾT KẾ ĐẶC BIỆT: BÌA ĐỒ ÁN MẠ VÀNG 📘 */
 .thesis-cover {
-    /* Đổi màu bìa thành màu xanh lục đậm/xanh da nhung cao cấp của quyển đồ án */
-    background: #0f2b46 !important; 
+    background: #0f2b46 !important; /* Màu xanh nhung thẫm của bìa da luận văn */
     color: #ffd700;
 }
 
-/* Khung viền họa tiết đồ án lồng nhau mạ vàng bằng CSS */
 .thesis-border {
-    border: 4px double #ffd700; /* Viền đôi màu vàng kim */
+    border: 4px double #ffd700; /* Đường viền chỉ đôi mạ vàng */
     margin: 10px;
     height: calc(100% - 20px) !important;
     width: calc(100% - 20px) !important;
-    padding: 20px 15px !important;
+    padding: 25px 15px !important;
     position: relative;
 }
 
-/* Góc họa tiết góc nhọn cổ điển của đồ án */
+/* Chi tiết góc hoa văn chéo góc cổ điển */
 .thesis-border::before {
     content: '';
     position: absolute;
     top: 5px; left: 5px; right: 5px; bottom: 5px;
-    border: 1px solid rgba(255, 215, 0, 0.4);
+    border: 1px solid rgba(255, 215, 0, 0.3);
     pointer-events: none;
 }
 
-/* Chữ tiêu đề trang bìa đồ án */
 .ministry-title {
     font-size: 0.75rem;
     font-weight: bold;
@@ -100,7 +99,7 @@ body {
     font-weight: 900;
     letter-spacing: 3px;
     color: #ffffff;
-    margin-top: 10px;
+    margin-top: 5px;
     text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
@@ -108,19 +107,19 @@ body {
     font-size: 1rem;
     font-weight: bold;
     color: #ffd700;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     letter-spacing: 1px;
 }
 
-/* Khung ảnh bo tròn mạ viền vàng trên bìa đồ án */
+/* Ảnh đại diện viền vàng sang trọng trên bìa */
 .thesis-avatar {
     border: 3px solid #ffd700 !important;
-    max-width: 170px !important;
+    max-width: 160px !important;
     margin: 10px 0 !important;
     box-shadow: 0 8px 20px rgba(0,0,0,0.4) !important;
 }
 
-/* Hộp thông tin góc dưới đồ án */
+/* Hộp thông tin SV thực hiện ở góc dưới bìa */
 .thesis-info-box {
     text-align: left;
     width: 100%;
@@ -130,13 +129,11 @@ body {
 }
 .thesis-info-box p {
     font-size: 0.8rem;
-    margin: 5px 0;
+    margin: 4px 0;
     color: #ffffff;
-    line-height: 1.3;
+    line-height: 1.4;
 }
-.thesis-info-box strong {
-    color: #ffd700;
-}
+.thesis-info-box strong { color: #ffd700; }
 
 .thesis-footer {
     margin-top: auto;
@@ -155,16 +152,17 @@ body {
 
 /* ------------------------------------------------ */
 
-/* Nội dung trang trong */
+/* Thiết kế kiểu chữ trang nội dung */
 .title-text-small { font-family: 'Playfair Display', serif; color: #0077b6; font-size: 1.5rem; }
-.student-name { font-family: 'Playfair Display', serif; color: #2d3436; font-size: 1.6rem; margin-top: 10px; font-weight: 700; }
-.sub-title { color: #00b4d8; font-size: 0.8rem; margin-top: 5px; font-weight: bold; }
+.student-name { font-family: 'Playfair Display', serif; color: #2d3436; font-size: 1.5rem; margin-top: 10px; font-weight: 700; }
 .cloud-line { margin: 10px 0; color: #00b4d8; font-size: 0.8rem; }
-.heart-icon { font-size: 3rem; color: #e74c3c; }
+.heart-icon { font-size: 3rem; color: #e74c3c; animation: beat 1.5s infinite; display: inline-block; }
 
+/* Khung ảnh kỷ niệm trang trong */
 .avatar-container {
     width: 100%;
-    border-radius: 15px;
+    max-width: 240px;
+    border-radius: 12px;
     overflow: hidden;
     border: 5px solid #f8f9fa;
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
@@ -172,32 +170,34 @@ body {
 }
 .avatar { width: 100%; display: block; object-fit: cover; }
 
+/* Hộp chi tiết Thời gian & Địa điểm */
 .detail-box {
     background: #e0f7fa;
-    padding: 20px;
-    border-radius: 15px;
+    padding: 18px;
+    border-radius: 12px;
     width: 100%;
     text-align: left;
     border-left: 5px solid #00acc1;
 }
-.detail-box p { font-size: 0.9rem; margin-bottom: 10px; line-height: 1.4; color: #2d3436; }
+.detail-box p { font-size: 0.85rem; margin-bottom: 8px; line-height: 1.4; color: #2d3436; }
 .detail-box i { color: #00acc1; width: 20px; }
-.address-text { font-size: 0.8rem !important; color: #636e72 !important; margin-top: -5px; }
+.address-text { font-size: 0.75rem !important; color: #636e72 !important; margin-top: -5px; padding-left: 20px; }
 
 .map-btn {
     display: block; background: #0077b6; color: white; text-decoration: none;
-    padding: 12px; border-radius: 10px; font-weight: bold; font-size: 0.8rem; text-align: center; margin-top: 10px;
+    padding: 10px; border-radius: 8px; font-weight: bold; font-size: 0.8rem; text-align: center; margin-top: 10px;
+    box-shadow: 0 4px 10px rgba(0, 119, 182, 0.2);
 }
 
-.quote-p { font-style: italic; color: #495057; font-size: 0.95rem; line-height: 1.5; margin-top: 10px; }
-.footer { font-size: 0.95rem; color: #212529; font-weight: bold; line-height: 1.6; }
-.flower-decor { margin-top: 20px; font-size: 1.2rem; }
+.quote-p { font-style: italic; color: #495057; font-size: 0.9rem; line-height: 1.5; margin-top: 5px; }
+.footer { font-size: 0.9rem; color: #212529; font-weight: bold; line-height: 1.6; }
+.flower-decor { margin-top: 15px; font-size: 1.2rem; }
 
-/* Mây trang trí nền */
+/* ☁️ HIỆU ỨNG NỀN TRỜI MÂY TRÔI & SAO SÁNG ☁️ */
 #sky-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
 .bright-cloud {
     position: absolute; background: white; border-radius: 100px;
-    box-shadow: 0 10px 30px rgba(255,255,255,0.5); animation: drift linear infinite;
+    box-shadow: 0 10px 30px rgba(255,255,255,0.4); animation: drift linear infinite;
 }
 .bright-cloud::before, .bright-cloud::after { content: ''; position: absolute; background: white; border-radius: 50%; }
 .bright-cloud::before { width: 50%; height: 100%; top: -40%; left: 15%; }
@@ -205,17 +205,25 @@ body {
 
 @keyframes drift { 0% { left: -200px; } 100% { left: 100vw; } }
 @keyframes flash { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+@keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
 
+/* Nút điều khiển đĩa nhạc tròn xoay */
 #music-toggle {
     position: fixed; top: 20px; right: 20px;
     width: 45px; height: 45px; border-radius: 50%;
     border: none; background: #0077b6; color: white; z-index: 100; cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 .rotating { animation: spin 5s linear infinite; }
 @keyframes spin { 100% { transform: rotate(360deg); } }
 
-@media (max-height: 650px) {
-    .page-content { padding: 15px !important; }
-    .thesis-main-title { font-size: 1.6rem; }
-    .thesis-avatar { max-width: 130px !important; }
+/* Cấu hình linh hoạt tương thích trên mobile màn hình nhỏ */
+@media (max-width: 600px) {
+    .book-container { height: 75vh; padding: 5px; }
+    .page-content { padding: 15px 10px !important; }
+    .thesis-main-title { font-size: 1.4rem; }
+    .thesis-avatar { max-width: 110px !important; }
+    .thesis-border { margin: 5px; padding: 15px 5px !important; }
+    .avatar-container { max-width: 160px; margin: 5px 0; }
+    .detail-box { padding: 10px; }
 }
