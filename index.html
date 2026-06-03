@@ -10,85 +10,94 @@
 </head>
 <body>
 
-    <div id="sky-container"></div>
+    <div id="welcome-screen">
+        <h1 style="color: white; font-family: 'Playfair Display', serif; text-align: center; padding: 0 20px;">
+            Chào mừng bạn đến với lễ bảo vệ đồ án của Ngân ❤️
+        </h1>
+        <button id="open-btn">MỞ THIỆP MỜI ✨</button>
+    </div>
 
-    <button id="music-toggle" class="rotating">🎵</button>
+    <div id="main-content" class="hidden">
+        <div id="sky-container"></div>
 
-    <div class="book-container">
-        <div class="flip-book" id="my-book">
-            
-            <div class="page page-cover thesis-cover" data-density="hard">
-                <div class="page-content thesis-border">
-                    <p class="ministry-title">BỘ GIÁO DỤC VÀ ĐÀO TẠO</p>
-                    <h4 class="university-title">TRƯỜNG ĐẠI HỌC SƯ PHẠM HÀ NỘI</h4>
-                    
-                    <div class="thesis-decor-line">⭐️⭐️⭐️</div>
-                    
-                    <h2 class="thesis-main-title">BÁO CÁO</h2>
-                    <h3 class="thesis-sub-title">ĐỒ ÁN TỐT NGHIỆP THÀNH CÔNG</h3>
-                    
-                    <div class="avatar-container thesis-avatar">
-                        <img src="anh-chinh.jpg" alt="Ảnh cử nhân Thái Thị Ngân" class="avatar">
-                    </div>
+        <button id="music-toggle">🎵</button>
 
-                    <div class="thesis-info-box">
-                        <p><strong>Sinh viên thực hiện:</strong> THÁI THỊ NGÂN</p>
-                        <p><strong>Chuyên ngành:</strong> Cử nhân Sư phạm</p>
-                        <p><strong>Niên khóa:</strong> 2022 - 2026</p>
-                    </div>
-
-                    <div class="thesis-footer">
-                        <p>HÀ NỘI - 2026</p>
-                        <div class="flip-hint-gold">Vuốt sang trái để mở đồ án & nghe nhạc ➡️</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="page page-left">
-                <div class="page-content">
-                    <h2 class="title-text-small">THÔNG TIN BUỔI LỄ</h2>
-                    <div class="cloud-line">☁️⭐️☁️⭐️☁️</div>
-
-                    <div class="detail-box">
-                        <p><i class="fas fa-university"></i> <strong>Trường:</strong> <br>Đại học Sư phạm Hà Nội</p>
-                        <p><i class="fas fa-clock"></i> <strong>Thời gian:</strong> <br>08:30 AM | 15/06/2026</p>
-                        <p><i class="fas fa-map-marker-alt"></i> <strong>Địa điểm:</strong> <br>Hội trường chính (Nhà K1)</p>
-                        <p class="address-text">136 Xuân Thủy, Cầu Giấy, Hà Nội</p>
+        <div class="book-container">
+            <div class="flip-book" id="my-book">
+                
+                <div class="page page-cover thesis-cover" data-density="hard">
+                    <div class="page-content thesis-border">
+                        <p class="ministry-title">BỘ GIÁO DỤC VÀ ĐÀO TẠO</p>
+                        <h4 class="university-title">TRƯỜNG ĐẠI HỌC SƯ PHẠM HÀ NỘI</h4>
                         
-                        <a href="https://www.google.com/maps/dir/?api=1&destination=Trường+Đại+học+Sư+phạm+Hà+Nội,+136+Xuân+Thủy,+Cầu+Giấy,+Hà+Nội" target="_blank" class="map-btn">
-                           DẪN ĐƯỜNG ĐẾN HNUE 📍
-                        </a>
+                        <div class="thesis-decor-line">⭐️⭐️⭐️</div>
+                        
+                        <h2 class="thesis-main-title">BÁO CÁO</h2>
+                        <h3 class="thesis-sub-title">ĐỒ ÁN TỐT NGHIỆP THÀNH CÔNG</h3>
+                        
+                        <div class="avatar-container thesis-avatar">
+                            <img src="anh-chinh.jpg" alt="Ảnh cử nhân Thái Thị Ngân" class="avatar">
+                        </div>
+
+                        <div class="thesis-info-box">
+                            <p><strong>Sinh viên thực hiện:</strong> THÁI THỊ NGÂN</p>
+                            <p><strong>Chuyên ngành:</strong> Cử nhân Sư phạm</p>
+                            <p><strong>Niên khóa:</strong> 2022 - 2026</p>
+                        </div>
+
+                        <div class="thesis-footer">
+                            <p>HÀ NỘI - 2026</p>
+                            <div class="flip-hint-gold">Vuốt sang trái để lật mở đồ án ➡️</div>
+                        </div>
                     </div>
-                    <div class="flower-decor">✨☁️✨</div>
                 </div>
-            </div>
 
-            <div class="page page-right">
-                <div class="page-content">
-                    <h2 class="title-text-small">KỶ NIỆM THANH XUÂN</h2>
-                    <div class="cloud-line">☁️⭐️☁️⭐️☁️</div>
-                    
-                    <div class="avatar-container decor-photo">
-                        <img src="anh-trang-tri.jpg" alt="Ảnh kỷ niệm Sư Phạm" class="avatar">
-                    </div>
+                <div class="page page-left">
+                    <div class="page-content">
+                        <h2 class="title-text-small">THÔNG TIN BUỔI LỄ</h2>
+                        <div class="cloud-line">☁️⭐️☁️⭐️☁️</div>
 
-                    <div class="thanks-box">
-                        <p class="quote-p">"Tốt nghiệp không phải là kết thúc, mà là khởi đầu cho một hành trình mới rực rỡ hơn." 🕊️</p>
+                        <div class="detail-box">
+                            <p><i class="fas fa-university"></i> <strong>Trường:</strong> <br>Đại học Sư phạm Hà Nội</p>
+                            <p><i class="fas fa-clock"></i> <strong>Thời gian:</strong> <br>08:30 AM | 15/06/2026</p>
+                            <p><i class="fas fa-map-marker-alt"></i> <strong>Địa điểm:</strong> <br>Hội trường chính (Nhà K1)</p>
+                            <p class="address-text">136 Xuân Thủy, Cầu Giấy, Hà Nội</p>
+                            
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=Trường+Đại+học+Sư+phạm+Hà+Nội,+136+Xuân+Thủy,+Cầu+Giấy,+Hà+Nội" target="_blank" class="map-btn">
+                               DẪN ĐƯỜNG ĐẾN HNUE 📍
+                            </a>
+                        </div>
+                        <div class="flower-decor">✨☁️✨</div>
                     </div>
                 </div>
-            </div>
 
-            <div class="page page-cover" data-density="hard">
-                <div class="page-content">
-                    <span class="heart-icon">❤️</span>
-                    <div class="thanks-box" style="margin-top: 30px;">
-                        <p class="footer">Sự hiện diện của bạn là niềm vinh hạnh và hạnh phúc lớn lao đối với Ngân!</p>
-                        <h3 class="student-name" style="font-size: 1.5rem; margin-top: 20px;">TRÂN TRỌNG CẢM ƠN!</h3>
+                <div class="page page-right">
+                    <div class="page-content">
+                        <h2 class="title-text-small">KỶ NIỆM THANH XUÂN</h2>
+                        <div class="cloud-line">☁️⭐️☁️⭐️☁️</div>
+                        
+                        <div class="avatar-container decor-photo">
+                            <img src="anh-trang-tri.jpg" alt="Ảnh kỷ niệm Sư Phạm" class="avatar">
+                        </div>
+
+                        <div class="thanks-box">
+                            <p class="quote-p">"Tốt nghiệp không phải là kết thúc, mà là khởi đầu cho một hành trình mới rực rỡ hơn." 🕊️</p>
+                        </div>
                     </div>
-                    <div class="cloud-line" style="margin-top: 40px;">☁️⭐️☁️⭐️☁️</div>
                 </div>
-            </div>
 
+                <div class="page page-cover" data-density="hard">
+                    <div class="page-content">
+                        <span class="heart-icon">❤️</span>
+                        <div class="thanks-box" style="margin-top: 30px;">
+                            <p class="footer">Sự hiện diện của bạn là niềm vinh hạnh và hạnh phúc lớn lao đối với Ngân!</p>
+                            <h3 class="student-name" style="font-size: 1.5rem; margin-top: 20px;">TRÂN TRỌNG CẢM ƠN!</h3>
+                        </div>
+                        <div class="cloud-line" style="margin-top: 40px;">☁️⭐️☁️⭐️☁️</div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 
