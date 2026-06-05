@@ -4,7 +4,6 @@
 
 body {
     font-family: 'Comfortaa', cursive, sans-serif;
-    /* 🌟 ĐỔI NỀN WEBSITE THÀNH MÀU XANH DA TRỜI TƯƠI SÁNG PHÙ HỢP CUỐN SÁCH */
     background: linear-gradient(180deg, #b3e5fc 0%, #e1f5fe 100%); 
     min-height: 100vh;
     display: flex;
@@ -36,7 +35,7 @@ body {
     perspective: 3000px; 
 }
 
-/* ĐỔ BÓNG ĐA TẦNG CHO CUỐN SÁCH NỔI BẬT TRÊN NỀN SÁNG */
+/* PHẦN CỨNG CHUYỂN ĐỘNG ANYFLIP */
 .flip-book {
     box-shadow: 
         0 25px 60px rgba(8, 33, 61, 0.35), 
@@ -44,25 +43,30 @@ body {
         inset 0 0 40px rgba(0, 0, 0, 0.05);
     background: transparent;
     border-radius: 8px;
+    transform-style: preserve-3d;
+    will-change: transform;
 }
 
-/* 🌟 CÁC TRANG TRONG NỀN TRẮNG TINH KHÔI */
+/* ĐỊNH DẠNG TRANG GIẤY TRẮNG */
 .page {
     background-color: #ffffff; 
     overflow: hidden;
     height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: transform, opacity;
 }
 
-/* HIỆU ỨNG ĐỘ TRŨNG NẾP GẤP SÁT GÁY SÁCH (MỊN VÀ SẮC NÉT) */
+/* HIỆU ỨNG GÁY SÁCH LẬP THỂ SÂU RÕ NÉT */
 .page-left {
-    background: linear-gradient(to right, #ffffff 82%, #f0f0f0 93%, #dbdbdb 97%, #666666 100%) !important;
+    background: linear-gradient(to right, #ffffff 80%, #f4f4f4 90%, #d8d8d8 96%, #444444 100%) !important;
 }
 .page-left .page-content {
     box-shadow: inset -15px 0 25px rgba(0, 0, 0, 0.05);
 }
 
 .page-right {
-    background: linear-gradient(to left, #ffffff 82%, #f0f0f0 93%, #dbdbdb 97%, #666666 100%) !important;
+    background: linear-gradient(to left, #ffffff 80%, #f4f4f4 90%, #d8d8d8 96%, #444444 100%) !important;
 }
 .page-right .page-content {
     box-shadow: inset 15px 0 25px rgba(0, 0, 0, 0.05);
@@ -70,7 +74,7 @@ body {
 
 .page-content {
     width: 100%; height: 100%;
-    padding: 35px 30px;
+    padding: 40px 35px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -79,47 +83,71 @@ body {
     position: relative;
 }
 
-/* 📸 CẤU CẤU TRÚC ẢNH BÌA PHỦ KÍN TRANG BÌA TRƯỚC */
+/* 🌟 KHUNG CHỈ ĐÔI VÀNG KIM UỐN LƯỢN MỀM MẠI BO GÓC 🌟 */
+.page-border-decor {
+    position: absolute;
+    top: 20px; left: 20px; right: 20px; bottom: 20px;
+    border: 3px double #dfb74c; 
+    border-radius: 15px; 
+    pointer-events: none;
+    z-index: 1;
+}
+.page-border-decor::before {
+    content: '';
+    position: absolute;
+    top: 4px; left: 4px; right: 4px; bottom: 4px;
+    border: 1px solid rgba(223, 183, 76, 0.4);
+    border-radius: 11px;
+}
+
+/* 🌿 NHÁNH NGUYỆT QUẾ ĐỐI XỨNG Ở GÓC TRANG 🌿 */
+.laurel-wreath-corner {
+    position: absolute;
+    bottom: 25px; right: 25px;
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(223, 183, 76, 0.6); 
+    font-size: 1.5rem;
+    z-index: 1; pointer-events: none;
+}
+.page-left .laurel-wreath-corner {
+    right: auto; left: 25px;
+    transform: scaleX(-1); 
+}
+
+/* ẢNH BÌA TRƯỚC FULL-SCREEN */
 .thesis-full-cover {
     background: #102741 !important;
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: 100%; height: 100%;
 }
 .page-content-full {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
+    width: 100%; height: 100%;
+    position: relative; overflow: hidden;
 }
 .full-cover-img {
-    width: 100%;
-    height: 100%;
-    object-fit: fill; /* Giúp ảnh khít hoàn toàn vào kích thước trang sách */
+    width: 100%; height: 100%;
+    object-fit: fill; 
 }
-/* Bóng đổ gáy sách đè lên bên phải của ảnh bìa */
 .spine-shadow-right {
     position: absolute;
     top: 0; right: 0; width: 30px; height: 100%;
     background: linear-gradient(to left, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
-    pointer-events: none;
-    z-index: 5;
+    pointer-events: none; z-index: 5;
 }
 .cover-hint-overlay {
-    position: absolute;
-    bottom: 25px; left: 0; width: 100%;
-    text-align: center;
-    z-index: 6;
+    position: absolute; bottom: 25px; left: 0; width: 100%;
+    text-align: center; z-index: 6;
 }
 
-/* 🌟 ĐỔI MÀU CHỮ TRÊN NỀN TRẮNG ĐỂ ĐẢM BẢO RÕ NÉT, DỄ NHÌN */
+/* CẤU HÌNH CHỮ RÕ NÉT */
 .title-text-small { 
     font-family: 'Playfair Display', serif; 
-    color: #102741; /* Màu xanh đậm quý phái thay vì màu xanh nhạt */
+    color: #102741; 
     font-size: 1.6rem; 
     font-weight: 700; 
     border-bottom: 2px solid #dfb74c; 
-    padding-bottom: 5px; 
+    padding-bottom: 5px;
+    z-index: 2;
 }
 .student-name { 
     font-family: 'Playfair Display', serif; 
@@ -128,26 +156,24 @@ body {
     margin-top: 10px; 
     font-weight: 700; 
 }
-.cloud-line { margin: 12px 0; color: #0096c7; font-size: 0.8rem; letter-spacing: 2px; }
+.cloud-line { margin: 12px 0; color: #0096c7; font-size: 0.8rem; letter-spacing: 2px; z-index: 2; }
 .heart-icon { font-size: 3.5rem; color: #e74c3c; animation: pulse 1.5s infinite alternate; }
 
-/* Khung ảnh kỷ niệm trang trong */
 .avatar-container {
     width: 100%; max-width: 210px; border-radius: 12px; overflow: hidden;
     border: 4px solid #f0f7f4; box-shadow: 0 10px 25px rgba(0,0,0,0.12); margin: 15px 0;
+    z-index: 2;
 }
 .avatar { width: 100%; display: block; object-fit: cover; }
 
-/* Hộp chi tiết thông tin địa điểm màu chữ đen xám rất rõ nét */
 .detail-box {
     background: #f4f9f9; padding: 20px; border-radius: 12px; width: 100%; text-align: left; border-left: 5px solid #102741;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.04); z-index: 2;
 }
-.detail-box p { font-size: 0.85rem; margin-bottom: 12px; line-height: 1.5; color: #2d3436; } /* Chữ màu tối rất rõ */
+.detail-box p { font-size: 0.85rem; margin-bottom: 12px; line-height: 1.5; color: #2d3436; } 
 .detail-box i { color: #102741; width: 22px; font-size: 0.95rem; }
 .address-text { font-size: 0.75rem !important; color: #555555 !important; margin-top: -8px; padding-left: 22px; }
 
-/* Nút bản đồ */
 .map-btn {
     display: block; background: #102741; color: white; text-decoration: none;
     padding: 12px; border-radius: 8px; font-weight: bold; font-size: 0.8rem; text-align: center; margin-top: 15px;
@@ -155,11 +181,11 @@ body {
 }
 .map-btn:hover { background: #1a3e66; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(16,39,65,0.35); }
 
-.quote-p { font-style: italic; color: #2d3436; font-size: 0.95rem; line-height: 1.6; margin-top: 15px; padding: 0 10px; }
-.footer { font-size: 0.95rem; color: #212529; font-weight: bold; line-height: 1.6; }
-.flower-decor { margin-top: 20px; font-size: 1.2rem; }
+.quote-p { font-style: italic; color: #2d3436; font-size: 0.95rem; line-height: 1.6; margin-top: 15px; padding: 0 10px; z-index: 2; }
+.footer { font-size: 0.95rem; font-weight: bold; line-height: 1.6; }
+.flower-decor { margin-top: 20px; font-size: 1.2rem; z-index: 2; }
 
-/* HOẠT ẢNH NỀN MÂY SAO TRÔI */
+/* HOẠT ẢNH MÂY SAO NỀN TRỜI */
 #sky-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
 .bright-cloud {
     position: absolute; background: rgba(255, 255, 255, 0.9); border-radius: 100px;
@@ -168,7 +194,14 @@ body {
 .bright-cloud::before, .bright-cloud::after { content: ''; position: absolute; background: rgba(255, 255, 255, 0.9); border-radius: 50%; }
 .bright-cloud::before { width: 50%; height: 100%; top: -40%; left: 15%; }
 .bright-cloud::after { width: 30%; height: 60%; top: -25%; right: 15%; }
-.bright-star { position: absolute; z-index: 2; pointer-events: none; color: #f39c12; } /* Sao ngả màu vàng cam lấp lánh trên nền trời sáng */
+.bright-star { position: absolute; z-index: 2; pointer-events: none; color: #f39c12; } 
+.bright-star { 
+    position: absolute; /* 🌟 Thêm dòng này để kích hoạt tọa độ bay cho ngôi sao */
+    z-index: 2; 
+    pointer-events: none; 
+    display: inline-block;
+    will-change: transform, opacity; /* Tối ưu đồ họa giúp sao bay mượt, không bị khựng */
+}
 
 @keyframes drift { 
     0% { transform: translateX(-200px); } 
@@ -181,7 +214,7 @@ body {
 @keyframes flash { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
 @keyframes pulse { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
 
-/* Màn hình chào */
+/* MÀN HÌNH CHÀO */
 #welcome-screen {
     position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
     background: radial-gradient(circle, #1a3e66 0%, #0a1b30 100%); display: flex; flex-direction: column;
